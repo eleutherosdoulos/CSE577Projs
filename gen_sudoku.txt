@@ -1,0 +1,14 @@
+% Each number 1..n**2 is assigned to one cell in each box
+1 { a(X,Y,N):X=1..n**2,Y=1..n**2,X1<=X,X<=X1+(n-1),Y1<=Y,Y<=Y1+(n-1)} 1:-N=1..n**2, X1 = n*(0..(n-1))+1, Y1 = n*(0..(n-1))+1.
+
+% one number per box
+:- a(X,Y,N), a(X,Y,N1), N!=N1.
+
+% one number per column
+:- a(X,Y,N), a(X,Y1,N), Y!=Y1.
+
+% one number per row
+:- a(X,Y,N), a(X1,Y,N), X!=X1.
+
+% offset rule, no number in the same position in more than one box
+:- a(X,Y,N), a(X1,Y1,N), X\3 == X1\3, Y\3 == Y1\3, X != X1, Y != Y1.
